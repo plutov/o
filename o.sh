@@ -23,7 +23,6 @@ get_url() {
 }
 
 url=$(get_url)
-echo $url
 if [ "" != "$url" ]; then
 	open $url
 fi
