@@ -1,10 +1,8 @@
 ### o
 
-o means open. simple CLI tool to open repository in browser.
+o means open. simple CLI tool to open current repository in browser.
 
-```
-o
-```
+Just type `o`!
 
 ### How to install
 
