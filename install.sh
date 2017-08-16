@@ -15,3 +15,4 @@ installFile() {
 
 downloadFile
 installFile
+echo "Installed in /usr/local/bin/o"
