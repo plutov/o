@@ -16,3 +16,10 @@ curl https://raw.githubusercontent.com/plutov/o/master/install.sh | sh
 
  - Tested in Linux, OSX, Windows
  - Tested for GitHub, BitBucket, Gitlab, Stash
+
+### Usage
+
+Use different remote:
+```
+o upstream
+```
