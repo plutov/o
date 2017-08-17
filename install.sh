@@ -11,7 +11,7 @@ downloadFile() {
 installFile() {
 	chmod +x /tmp/o.sh
 	SUDO=''
-	if (( $EUID != 0 )); then
+	if [ $EUID != 0 ]; then
 		SUDO='sudo'
 	fi
 	$SUDO mv /tmp/o.sh /usr/local/bin/o
