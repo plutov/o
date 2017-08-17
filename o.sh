@@ -4,19 +4,24 @@
 
 set -e
 
+remote="$1"
+if [ "" == "$remote" ]; then
+	remote="origin"
+fi
+
 # Get repository URL based on git remote
 get_url() {
-	remote=$(git remote get-url origin)
-	if [ "" != "$remote" ]; then
-		remote=${remote/git\@github\.com\:/https://github.com/}
-		remote=${remote/git\@bitbucket\.org\:/https://bitbucket.org/}
-		remote=${remote/git\@gitlab\.com\:/https://gitlab.com/}
-		remote=${remote/\.git/}
-		remote=${remote/git\@/}
-		remote=${remote/ssh\:\/\//http:\/\/}
-		domain=$(echo "$remote" | awk -F/ '{print $3}')
+	url=$(git remote get-url $remote)
+	if [ "" != "$url" ]; then
+		url=${url/git\@github\.com\:/https://github.com/}
+		url=${url/git\@bitbucket\.org\:/https://bitbucket.org/}
+		url=${url/git\@gitlab\.com\:/https://gitlab.com/}
+		url=${url/\.git/}
+		url=${url/git\@/}
+		url=${url/ssh\:\/\//http:\/\/}
+		domain=$(echo "$url" | awk -F/ '{print $3}')
 		if [[ $domain == *"stash"* ]]; then
-			remote=${remote/$domain/$domain\/scm}
+			url=${url/$domain/$domain\/scm}
 		fi
 
 		# Add branch path if not master
@@ -24,11 +29,11 @@ get_url() {
 		if [[ $branch != "master" ]]; then
 			path=$(get_branch_path $domain)
 			if [[ $path != "" ]]; then
-				remote="$remote$path$branch"
+				url="$url$path$branch"
 			fi
 		fi
 
-		echo $remote
+		echo $url
 	fi
 }
 

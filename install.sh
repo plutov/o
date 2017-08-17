@@ -10,7 +10,11 @@ downloadFile() {
 
 installFile() {
 	chmod +x /tmp/o.sh
-	sudo mv /tmp/o.sh /usr/local/bin/o
+	SUDO=''
+	if (( $EUID != 0 )); then
+		SUDO='sudo'
+	fi
+	$SUDO mv /tmp/o.sh /usr/local/bin/o
 }
 
 downloadFile
