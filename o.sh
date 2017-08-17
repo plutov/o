@@ -4,10 +4,7 @@
 
 set -e
 
-remote="$1"
-if [ "" == "$remote" ]; then
-	remote="origin"
-fi
+remote=${1:-"origin"}
 
 # Get repository URL based on git remote
 get_url() {

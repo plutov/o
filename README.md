@@ -12,14 +12,24 @@ Just type `o`!
 curl -s https://raw.githubusercontent.com/plutov/o/master/install.sh | sh
 ```
 
-### Limitations
-
- - Tested in Linux, OSX, Windows
- - Tested for GitHub, BitBucket, Gitlab, Stash
-
 ### Usage
 
 Use different remote:
 ```
 o upstream
 ```
+
+### Supported remote repositories
+
+`o` can automatically guess the corresponding repository page for remotes (default looks for origin) on the following hosts:
+
+ - GitHub
+ - GitLab
+ - BitBucket
+ - Stash
+
+### Supported OS
+
+ - Linux
+ - OSX
+ - Windows
