@@ -9,7 +9,7 @@ Just type `o`!
 ### How to install
 
 ```
-curl https://raw.githubusercontent.com/plutov/o/master/install.sh | sh
+curl -s https://raw.githubusercontent.com/plutov/o/master/install.sh | sh
 ```
 
 ### Limitations

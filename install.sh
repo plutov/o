@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Author: Alex Pliutau http://pliutau.com
 
@@ -10,7 +10,7 @@ BIN_FILE="/usr/local/bin/o"
 
 downloadFile() {
 	if type "curl" > /dev/null; then
-		curl -L "$DOWNLOAD_URL" -o "$TMP_FILE"
+		curl -s -L "$DOWNLOAD_URL" -o "$TMP_FILE"
 	elif type "wget" > /dev/null; then
 		wget -q -O "$TMP_FILE" "$DOWNLOAD_URL"
 	fi
