@@ -17,7 +17,7 @@ get_url() {
 		url=${url/git\@/}
 		url=${url/ssh\:\/\//http:\/\/}
 		domain=$(echo "$url" | awk -F/ '{print $3}')
-		if [[ $domain == *"stash"* ]]; then
+		if [[ $domain == *"stash"* && $url != *$domain"/scm/"* ]]; then
 			url=${url/$domain/$domain\/scm}
 		fi
 
