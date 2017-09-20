@@ -2,7 +2,7 @@
 
 O means open. simple CLI tool to open current repository in browser.
 
-Just type `o`!
+Just type `o`
 
 ![o.gif](https://raw.githubusercontent.com/plutov/o/master/o.gif)
 
