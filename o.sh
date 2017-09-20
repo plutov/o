@@ -25,8 +25,15 @@ get_url() {
 		branch=$(get_branch)
 		if [[ $branch != "master" ]]; then
 			path=$(get_branch_path $domain)
-			if [[ $path != "" ]]; then
+			if [[ $path != "" && $domain != *"stash"* ]]; then
 				url="$url$path$branch"
+			fi
+			if [[ $domain == *"stash"* ]]; then
+				old="/scm/spp/"
+				new="/projects/spp/repos/"
+				url="${url/$old/$new}"
+				url="$url$path$(rawurlencode $branch)"
+				url="${url//http:\/\/*@stash/http://stash}"
 			fi
 		fi
 
@@ -49,7 +56,29 @@ get_branch_path() {
 		path="/src?at="
 	fi
 
+	if [[ $1 == *"stash"* ]]; then
+		path="/browse?at="$(rawurlencode refs/heads/)
+	fi
+
 	echo $path
+}
+# Encode url.
+rawurlencode() {
+	local string="${1}"
+	local strlen=${#string}
+	local encoded=""
+	local pos c o
+
+	for (( pos=0 ; pos<strlen ; pos++ )); do
+		c=${string:$pos:1}
+		case "$c" in
+			[-_.~a-zA-Z0-9] ) o="${c}" ;;
+			* )	printf -v o '%%%02x' "'$c"
+		esac
+		encoded+="${o}"
+	done
+
+	echo "${encoded}"
 }
 
 # Get program to open browser

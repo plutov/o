@@ -6,7 +6,6 @@ set -e
 
 DOWNLOAD_URL="https://raw.githubusercontent.com/plutov/o/master/o.sh"
 TMP_FILE="/tmp/o.sh"
-BIN_FILE="/usr/local/bin/o"
 
 downloadFile() {
 	if type "curl" > /dev/null; then
@@ -22,7 +21,14 @@ installFile() {
 	if [ $EUID != 0 ]; then
 		SUDO='sudo'
 	fi
-	$SUDO mv "$TMP_FILE" /usr/local/bin/o
+
+	read -p "Please pick a name for your git open [o]:" o_name
+	echo    # (optional) move to a new line
+	if [[ "$o_name" == "" ]]; then
+		o_name="o"
+	fi
+	BIN_FILE="/usr/local/bin/$o_name"
+	$SUDO mv "$TMP_FILE" $BIN_FILE
 }
 
 downloadFile
