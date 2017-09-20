@@ -6,7 +6,6 @@ set -e
 
 DOWNLOAD_URL="https://raw.githubusercontent.com/plutov/o/master/o.sh"
 TMP_FILE="/tmp/o.sh"
-BIN_FILE="/usr/local/bin/"
 
 downloadFile() {
 	if type "curl" > /dev/null; then

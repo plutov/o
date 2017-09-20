@@ -97,5 +97,4 @@ get_open_program() {
 url=$(get_url)
 if [ "" != "$url" ]; then
 	$(get_open_program) $url
-	# echo $url
 fi
