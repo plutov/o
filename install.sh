@@ -27,10 +27,11 @@ installFile() {
 	if [[ "$o_name" == "" ]]; then
 		o_name="o"
 	fi
-	BIN_FILE="/usr/local/bin/$o_name"
-	$SUDO mv "$TMP_FILE" $BIN_FILE
+
+	local bin_file="/usr/local/bin/$o_name"
+	$SUDO mv $TMP_FILE $bin_file
+	echo "Installed in $bin_file"
 }
 
 downloadFile
 installFile
-echo "Installed in $BIN_FILE"
