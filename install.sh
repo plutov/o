@@ -22,13 +22,7 @@ installFile() {
 		SUDO='sudo'
 	fi
 
-	read -p "Please pick a name for your git open [o]:" o_name
-	echo    # (optional) move to a new line
-	if [[ "$o_name" == "" ]]; then
-		o_name="o"
-	fi
-
-	local bin_file="/usr/local/bin/$o_name"
+	local bin_file="/usr/local/bin/o"
 	$SUDO mv $TMP_FILE $bin_file
 	echo "Installed in $bin_file"
 }
