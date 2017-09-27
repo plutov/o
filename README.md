@@ -14,6 +14,11 @@ curl -s https://raw.githubusercontent.com/plutov/o/master/install.sh | sh
 
 ### Usage
 
+Basic:
+```
+o
+```
+
 Use different remote:
 ```
 o upstream
