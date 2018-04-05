@@ -36,7 +36,7 @@ get_url() {
 
 		# Append protocol if it's missing
 		if [[ $url != "https://"* ]] && [[ $url != "http://"* ]]; then
-			url="https://"$url
+			url="http://"$url
 		fi
 
 		echo $url
