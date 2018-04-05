@@ -10,16 +10,34 @@ remote=${1:-"origin"}
 get_url() {
 	url=$(git remote get-url $remote)
 	if [ "" != "$url" ]; then
+		# Replace common Git host URLs
 		url=${url/git\@github\.com\:/https://github.com/}
 		url=${url/git\@bitbucket\.org\:/https://bitbucket.org/}
 		url=${url/git\@gitlab\.com\:/https://gitlab.com/}
+
+		# Remove .git appendix
 		url=${url/\.git/}
-		url=${url/git\@/}
+
+		# Remove git username
+		url=${url/git\@}
+
+		# Replace first colon with slash (ignore SSH, since its a port then)
+		if [[ $url != "https://"* ]] && [[ $url != "http://"* ]] && [[ $url != "ssh://"* ]]; then
+			url=${url/:/\/}
+		fi
 		url=${url/ssh\:\/\//http:\/\/}
+
+		# Append protocol if it's missing until now
+		if [[ $url != "https://"* ]] && [[ $url != "http://"* ]]; then
+			url="http://"$url
+		fi
+
+		# Simple domain parser - everything between second and third slash
 		domain=$(echo "$url" | awk -F/ '{print $3}')
 		if [[ $domain == *"stash"* && $url != *$domain"/scm/"* ]]; then
 			url=${url/$domain/$domain\/scm}
 		fi
+
 		# Remove username from URL
 		if [[ $domain == *"stash"* ]]; then
 			url=${url/http:\/\/*@stash/http:\/\/stash}
@@ -32,11 +50,6 @@ get_url() {
 			if [[ $path != "" ]]; then
 				url="$url$path$branch"
 			fi
-		fi
-
-		# Append protocol if it's missing
-		if [[ $url != "https://"* ]] && [[ $url != "http://"* ]]; then
-			url="http://"$url
 		fi
 
 		echo $url
