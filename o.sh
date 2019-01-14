@@ -52,6 +52,11 @@ get_url() {
 			fi
 		fi
 
+		# Append protocol if it's missing
+		if [[ $url != "https://"* ]] && [[ $url != "http://"* ]]; then
+			url="https://"$url
+		fi
+
 		echo $url
 	fi
 }
